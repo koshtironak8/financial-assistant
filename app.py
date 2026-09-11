@@ -31,14 +31,14 @@ if "messages" not in st.session_state:
         {
             "role": "model",
             "content": (
-                "👋 **Namaste! Main hoon aapka AI Financial Advisor & Wealth Mentor.**\n\n"
-                "Main sirf generic kitabi baatein nahi, balki aapki **actual financial situation** ke hisaab se customized strategy banata hoon:\n\n"
-                "🔹 **Debt Elimination**: Credit cards aur high-interest loans se azaadi (Snowball vs. Avalanche strategy)\n"
-                "🔹 **Smart Wealth Building**: Index funds (Nifty 50), compounding SIPs aur asset allocation\n"
-                "🔹 **Emergency Safety Shield**: 3-tier liquid buffer taaki kisi se udhar na lena pade\n"
-                "🔹 **Tax Planning**: New vs. Old Tax Regime, 80C, 80D aur NPS smart deductions\n"
-                "🔹 **Realistic Budgeting**: Real-world cash flows (bina kisi rigid 50/30/20 ke force kiye!)\n\n"
-                "Niche diye gaye quick questions par click karein ya apna sawal type karein!"
+                "👋 **Hello! I am FinAdvisor Pro, your dedicated AI Financial Advisor & Wealth Mentor.**\n\n"
+                "I provide customized, practical strategies based on your **actual financial situation**, moving far beyond generic textbook formulas:\n\n"
+                "🔹 **Debt Elimination**: Clear credit cards and high-interest loans rapidly (Snowball vs. Avalanche strategies)\n"
+                "🔹 **Smart Wealth Building**: Low-cost index funds (Nifty 50), disciplined SIP compounding, and asset allocation\n"
+                "🔹 **Emergency Safety Shield**: 3-tier liquid buffer so you never need to borrow during crises\n"
+                "🔹 **Tax Optimization**: New vs. Old Tax Regime comparisons, Section 80C, 80D, and NPS smart deductions\n"
+                "🔹 **Realistic Cash Flow Budgeting**: Tailored frameworks without forcing rigid 50/30/20 rules\n\n"
+                "Click any of the strategic scenarios below or type your financial question to begin!"
             ),
         }
     ]
@@ -290,6 +290,11 @@ client = genai.Client(api_key=api_key)
 
 SYSTEM_PROMPT = """You are 'FinAdvisor Pro', a top-tier, practical, and highly empathetic personal financial advisor and wealth mentor.
 
+LANGUAGE RULE (MANDATORY):
+- Always reply strictly in professional, clear, and easy-to-understand English!
+- Even if the user asks questions in Hindi or Hinglish (e.g. 'bhai loan kaise chukau', 'kaha invest karu'), understand their intent accurately, but ALWAYS provide your complete response, explanations, and advice strictly in ENGLISH.
+- Never reply in Hindi or Hinglish.
+
 CRITICAL INSTRUCTION REGARDING 50/30/20:
 - DO NOT default to or mindlessly recite the "50/30/20 rule"! Users are tired of hearing this generic cliché. Real-world finances are nuanced: people deal with high metro rents, student loans, credit card debt, low entry-level allowances, or variable freelancing incomes where 50/30/20 is completely impractical.
 - Only discuss 50/30/20 if the user explicitly asks for it by name. Otherwise, focus on realistic cash flows and personalized strategies.
@@ -302,11 +307,9 @@ YOUR CORE ADVISORY FRAMEWORK:
    - For beginners: Low-cost broad market Index Funds (e.g., Nifty 50 index fund), Public Provident Fund (PPF), or Sovereign Gold Bonds/Gold ETFs.
    - Demystify SIPs, compounding horizons (10-15+ years), and resisting market panic.
 5. Tax Optimization: Guide on Section 80C, 80D, 80CCD(1B) NPS, and comparing the New vs Old Tax Regime based on deductions.
-6. Multilingual & Natural Tone:
-   - If the user talks in Hinglish / Hindi ("bhai loan kaise chukau", "kaha invest karu"), respond warmly in relatable, professional Hinglish with clear terms.
-   - If in English, provide structured, clear English.
+6. Tone & Format:
    - Format with bold numbers, clear bullet points, actionable step 1-2-3 roadmaps, and realistic Indian Rupee (₹) amounts.
-   - Maintain a friendly, supportive tone without preachy moralizing.
+   - Maintain a friendly, supportive, and empowering advisor tone.
 """
 
 # --- Navigation Tabs: AI Chat vs Interactive Advisory Toolkits ---
@@ -323,34 +326,34 @@ with main_tab_chat:
         with col_q1:
             if st.button("🚀 How to start investing ₹2,000/month as a total beginner?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "Main ek complete beginner hoon aur har mahine ₹2,000 invest karna chahta hoon. "
-                    "Mujhe zero-risk se lekar moderate-risk options samjhao (Index funds, PPF, FD) aur step-by-step roadmap do."
+                    "I am a complete beginner and want to start investing ₹2,000 per month. "
+                    "Please explain low-risk to moderate-risk options (Index funds, PPF, FDs) and give me a clear step-by-step roadmap."
                 )
             if st.button("💳 Snowball vs Avalanche: Fastest way to eliminate credit card & EMI debt?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "Mere upar loan aur credit card ki EMI hai. Debt Avalanche aur Debt Snowball method kya hain, "
-                    "aur sabse tez tareeka kya hai high-interest debt se bahar aane ka?"
+                    "I have outstanding loans and credit card EMIs. What are the Debt Avalanche and Debt Snowball methods, "
+                    "and what is the fastest strategy to become debt-free?"
                 )
             if col_q1.button("🎯 How do I plan for a ₹10 Lakh goal in 5 years?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "Mujhe agle 5 saal me ₹10 Lakh ka fund banana hai (higher education / business / marriage ke liye). "
-                    "Kitni monthly SIP karni hogi aur asset allocation (Equity vs Debt) kaisa rakhna chahiye?"
+                    "I want to build a ₹10 Lakh fund in 5 years for a milestone goal. "
+                    "What monthly SIP amount do I need, and how should I allocate my investments between equity and debt?"
                 )
         with col_q2:
             if st.button("🛡️ Emergency Fund: How to split between Savings, Sweep-in FD, and Liquid Funds?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "Emergency fund kitna bada hona chahiye aur use exactly kahan park karna chahiye? "
-                    "Savings account, Sweep-in FD aur Liquid Mutual Funds ka ideal 3-tier split samjhao."
+                    "How large should an emergency fund be and where should I park it? "
+                    "Explain the ideal 3-tier allocation between a savings account, auto-sweep FD, and liquid mutual funds."
                 )
             if st.button("⚖️ New Tax Regime vs Old Tax Regime: Which saves more money?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "New Tax Regime vs Old Tax Regime me kya fark hai? Kis salary bracket me Old Regime better hoti hai "
-                    "aur kab New Regime choose karni chahiye? 80C aur 80D ka impact bhi batao."
+                    "What is the difference between the New Tax Regime and Old Tax Regime in India? "
+                    "Under which income levels is the Old Regime better, and when does the New Regime save more tax?"
                 )
             if col_q2.button("🪙 Nifty 50 Index Funds vs Active Mutual Funds: Which is better?", use_container_width=True):
                 st.session_state.pending_chat_prompt = (
-                    "Nifty 50 Index Fund aur Active Mutual Fund me kya difference hai? "
-                    "Expense ratio aur long-term returns ke hisaab se beginners ke liye kaunsa better rehta hai?"
+                    "What is the difference between a Nifty 50 Index Fund and an Active Mutual Fund? "
+                    "Considering expense ratios and long-term performance, which one is better for beginners?"
                 )
 
     # Replay Chat Messages
@@ -811,19 +814,19 @@ with main_tab_tools:
         if score >= 85:
             grade_title = "🏆 Financial Fortress (Excellent)"
             grade_color = "#059669"
-            advice_summary = "Aapka financial base bohot strong hai. Ab advanced wealth compounding aur tax optimization par focus karein."
+            advice_summary = "Your financial base is remarkably solid. Focus on advanced wealth compounding, tax optimization, and long-term asset allocation."
         elif score >= 65:
             grade_title = "🛡️ Stable Foundation (Good)"
             grade_color = "#0284C7"
-            advice_summary = "Aap achhe track par hain. Bas high-interest debt se dur rahein aur emergency fund ko 6 months tak push karein."
+            advice_summary = "You are on a steady path. Aim to expand your emergency fund to 6 months of expenses and eliminate all high-interest debt."
         elif score >= 45:
             grade_title = "⚠️ Vulnerable Zone (Action Needed)"
             grade_color = "#D97706"
-            advice_summary = "Kisi bhi emergency me debt trap me fasne ka risk hai. Sabse pehle 1-2 month buffer aur health insurance secure karein."
+            advice_summary = "You are vulnerable to debt traps if an emergency arises. Prioritize building an immediate 1-2 month cash buffer and securing independent health cover."
         else:
             grade_title = "🚨 Critical Alarm (Immediate Priority)"
             grade_color = "#DC2626"
-            advice_summary = "High priority: Kisi bhi tarah ke credit card/instant loan apps se bachein aur minimum ₹15,000 ka cash reserve banayein."
+            advice_summary = "Top priority: Avoid high-interest loans/credit card debt and build an initial liquid buffer of at least ₹15,000 immediately."
 
         st.markdown(
             f"""
@@ -846,12 +849,12 @@ with main_tab_tools:
         )
 
         diagnostic_prompt_text = (
-            f"Maine apna Financial Health Diagnostic complete kiya hai. Mera Score hai: {score}/100 ({grade_title}).\n"
-            f"- Emergency Fund: {q_emergency}\n"
+            f"I have completed my Financial Health Diagnostic. My score is {score}/100 ({grade_title}).\n"
+            f"- Emergency Fund Buffer: {q_emergency}\n"
             f"- Monthly Savings Rate: {q_savings_rate}\n"
             f"- Debt Status: {q_debt}\n"
             f"- Health Insurance: {q_insurance}\n\n"
-            "Mera ek personalized step-by-step financial plan banao ki agle 6 mahine me mujhe kya 3 concrete steps lene chahiye."
+            "Please create a personalized step-by-step financial plan detailing the top 3 concrete actions I should take over the next 6 months to strengthen my financial situation."
         )
 
         if st.button("📋 Send This Diagnostic to AI Advisor for 1-on-1 Plan", use_container_width=True):
