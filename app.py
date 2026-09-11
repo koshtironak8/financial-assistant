@@ -370,6 +370,11 @@ Rules:
 - For questions outside the topic, redirect the user toward financial literacy and poverty-related support.
 """
 
+# --- Reset on Shared Link or Fresh URL ---
+if any(param in st.query_params for param in ["clean", "new", "reset"]):
+    st.session_state.messages = []
+    st.query_params.clear()
+
 # --- Initialize Messages ---
 if "messages" not in st.session_state:
     st.session_state.messages = [
